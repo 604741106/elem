@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bm.elem.mapper.AmovieMapper" >
+  <resultMap id="BaseResultMap" type="com.bm.elem.model.Amovie" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="bt_url" property="btUrl" jdbcType="VARCHAR" />
+    <result column="company" property="company" jdbcType="VARCHAR" />
+    <result column="file_type" property="fileType" jdbcType="VARCHAR" />
+    <result column="html_url" property="htmlUrl" jdbcType="VARCHAR" />
+    <result column="role" property="role" jdbcType="VARCHAR" />
+    <result column="size" property="size" jdbcType="INTEGER" />
+    <result column="tittle" property="tittle" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.bm.elem.model.Amovie" extends="BaseResultMap" >
+    <result column="img_url" property="imgUrl" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, bt_url,img_url, company, file_type, html_url, role, size, tittle
+  </sql>
+  <sql id="Blob_Column_List" >
+    img_url
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+  select
+  <include refid="Base_Column_List" />
+  ,
+  <include refid="Blob_Column_List" />
+  from amovie
+  where id = #{id,jdbcType=INTEGER}
+</select>
+
+  <select id="selectAll" resultMap="ResultMapWithBLOBs">
+    select
+    id, bt_url,img_url, company, file_type, html_url, role, tittle
+    from amovie
+    where img_url is not null
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from amovie
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bm.elem.model.Amovie" >
+    insert into amovie (id, bt_url, company, 
+      file_type, html_url, role, 
+      size, tittle, img_url
+      )
+    values (#{id,jdbcType=INTEGER}, #{btUrl,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, 
+      #{fileType,jdbcType=VARCHAR}, #{htmlUrl,jdbcType=VARCHAR}, #{role,jdbcType=VARCHAR}, 
+      #{size,jdbcType=INTEGER}, #{tittle,jdbcType=VARCHAR}, #{imgUrl,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bm.elem.model.Amovie" >
+    insert into amovie
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="btUrl != null" >
+        bt_url,
+      </if>
+      <if test="company != null" >
+        company,
+      </if>
+      <if test="fileType != null" >
+        file_type,
+      </if>
+      <if test="htmlUrl != null" >
+        html_url,
+      </if>
+      <if test="role != null" >
+        role,
+      </if>
+      <if test="size != null" >
+        size,
+      </if>
+      <if test="tittle != null" >
+        tittle,
+      </if>
+      <if test="imgUrl != null" >
+        img_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="btUrl != null" >
+        #{btUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null" >
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="fileType != null" >
+        #{fileType,jdbcType=VARCHAR},
+      </if>
+      <if test="htmlUrl != null" >
+        #{htmlUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        #{size,jdbcType=INTEGER},
+      </if>
+      <if test="tittle != null" >
+        #{tittle,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrl != null" >
+        #{imgUrl,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bm.elem.model.Amovie" >
+    update amovie
+    <set >
+      <if test="btUrl != null" >
+        bt_url = #{btUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null" >
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="fileType != null" >
+        file_type = #{fileType,jdbcType=VARCHAR},
+      </if>
+      <if test="htmlUrl != null" >
+        html_url = #{htmlUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        role = #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        size = #{size,jdbcType=INTEGER},
+      </if>
+      <if test="tittle != null" >
+        tittle = #{tittle,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrl != null" >
+        img_url = #{imgUrl,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bm.elem.model.Amovie" >
+    update amovie
+    set bt_url = #{btUrl,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      file_type = #{fileType,jdbcType=VARCHAR},
+      html_url = #{htmlUrl,jdbcType=VARCHAR},
+      role = #{role,jdbcType=VARCHAR},
+      size = #{size,jdbcType=INTEGER},
+      tittle = #{tittle,jdbcType=VARCHAR},
+      img_url = #{imgUrl,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bm.elem.model.Amovie" >
+    update amovie
+    set bt_url = #{btUrl,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      file_type = #{fileType,jdbcType=VARCHAR},
+      html_url = #{htmlUrl,jdbcType=VARCHAR},
+      role = #{role,jdbcType=VARCHAR},
+      size = #{size,jdbcType=INTEGER},
+      tittle = #{tittle,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

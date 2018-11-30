@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bm.elem.mapper.UserInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bm.elem.model.UserInfo" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="eleme_key" property="elemeKey" jdbcType="VARCHAR" />
+    <result column="openid" property="openid" jdbcType="VARCHAR" />
+    <result column="qq" property="qq" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="cookie" property="cookie" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, eleme_key, openid, qq, tel, cookie
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from userinfo
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from userinfo
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bm.elem.model.UserInfo" >
+    insert into userinfo (id, eleme_key, openid, 
+      qq, tel, cookie)
+    values (#{id,jdbcType=VARCHAR}, #{elemeKey,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, 
+      #{qq,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{cookie,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bm.elem.model.UserInfo" >
+    insert into userinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="elemeKey != null" >
+        eleme_key,
+      </if>
+      <if test="openid != null" >
+        openid,
+      </if>
+      <if test="qq != null" >
+        qq,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="cookie != null" >
+        cookie,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="elemeKey != null" >
+        #{elemeKey,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null" >
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="cookie != null" >
+        #{cookie,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bm.elem.model.UserInfo" >
+    update userinfo
+    <set >
+      <if test="elemeKey != null" >
+        eleme_key = #{elemeKey,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null" >
+        openid = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="cookie != null" >
+        cookie = #{cookie,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bm.elem.model.UserInfo" >
+    update userinfo
+    set eleme_key = #{elemeKey,jdbcType=VARCHAR},
+      openid = #{openid,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      cookie = #{cookie,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

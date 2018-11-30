@@ -1,0 +1,45 @@
+/*img{*/
+    /*width: 600px;*/
+    /*height:350px;*/
+/*}*/
+.upPage{
+    position: fixed;
+    z-index: 10;
+    top: 556px;
+}
+.downPage{
+    position: fixed;
+    z-index: 10;
+    left: 80px;
+    top: 556px;
+}
+
+.upTitle{
+    position: fixed;
+    z-index: 10;
+    left: 160px;
+    top: 556px;
+}
+.downTitle{
+    position: fixed;
+    z-index: 10;
+    left: 240px;
+    top: 556px;
+}
+
+
+.layui-tab-title{
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+}
+.layui-tab-title li{
+    padding: 0px;
+
+}
+.layui-tab-content{
+    position: absolute;
+    top: 41px;
+}
